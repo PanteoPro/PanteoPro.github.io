@@ -102,8 +102,8 @@ var gameTimer = {
 	}
 }
 
-var ROWS = 3;
-var COLUMNS = 4;
+var ROWS = 8;
+var COLUMNS = 10;
 var SIZE = monster.SIZE/2;
 var SPACE = 10;
 
