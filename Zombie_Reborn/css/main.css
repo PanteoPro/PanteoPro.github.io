@@ -1,0 +1,14 @@
+#stage {
+	width: 286px;
+	height: 212px;
+}
+
+canvas {
+	cursor: pointer;
+	width: 64px;
+	height: 64px;
+	position: absolute;
+	display: block;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+}
