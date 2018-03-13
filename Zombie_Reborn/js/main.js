@@ -179,7 +179,7 @@ function endGame(){
 
 function loadHandler(){
 	buildMap();
-	gameTimer.time = 5;
+	gameTimer.time = 30;
 	gameTimer.start();
 	updateAnimation();
 }
