@@ -1,0 +1,20 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #666;
+}
+
+#wrapper {
+	width: 1280px;
+	margin: 30px auto;
+	padding: 20px 0;
+	text-align: center;
+	background-color: #555;
+}
+
+canvas {
+	border: 1px solid #333;
+}
