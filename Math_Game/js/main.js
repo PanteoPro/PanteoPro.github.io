@@ -45,14 +45,46 @@ var bulletObj = {
 	speed: 10,
 };
 
+var wallObj = {
+	sourceX: 0,
+	sourceY: 0,
+	sourceWidth: 100,
+	sourceHeight: 100,
+	x: 0,
+	y: 0,
+	width: 30,
+	height: 30,
+	break: false
+}
+
 var moveTop = false;
 var moveBottom = false;
 var moveLeft = false;
 var moveRight = false;
 
 
+
+
 var spriteArray = [];
 var bulletArray = [];
+var wallArray = [];
+
+for(var i = 0; i < 10; i++){
+	var wall = Object.create(wallObj);
+	wall.y = 70;
+	wall.x = 150 + i * wall.width;
+	wallArray.push(wall);
+}
+
+for(var i = 0; i < 10; i++){
+	var wall = Object.create(wallObj);
+	wall.width = 15;
+	wall.height = 15;
+	wall.y = 300;
+	wall.x = 150 + i * wall.width;
+	wall.break = true;
+	wallArray.push(wall);
+}
 
 var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
@@ -161,6 +193,20 @@ function updateBullet(){
 
 		if(bullet.x < 0 || bullet.x > canvas.width) bulletArray.splice(i, 1);
 		if(bullet.y < 0 || bullet.y > canvas.height) bulletArray.splice(i, 1);
+
+		for(var j = 0; j < wallArray.length; j++){
+			var wall = wallArray[j];
+			if(bullet.x > wall.x && bullet.x < wall.x + wall.width){
+				if(bullet.y > wall.y && bullet.y < wall.y + wall.height){
+					if(wall.break){
+						wallArray.splice(j,1);
+						bulletArray.splice(i,1);
+					}else{
+						bulletArray.splice(i,1);
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -172,6 +218,7 @@ function render(){
 	ctx.fillStyle = "white";
 	ctx.fillText("Ammo: " + player.bullet,5,30);
 	renderSprite();
+	renderWall();
 	renderBullet();
 }
 
@@ -192,5 +239,15 @@ function renderBullet(){
 			bullet.sourceX,bullet.sourceY,
 			bullet.sourceWidth,bullet.sourceHeight,
 			bullet.x,bullet.y,bullet.width,bullet.height);
+	}
+}
+
+function renderWall(){
+	for(var i = 0; i < wallArray.length; i++){
+		wall = wallArray[i];	
+		ctx.drawImage(spriteImage,
+			wall.sourceX,wall.sourceY,
+			wall.sourceWidth,wall.sourceHeight,
+			wall.x,wall.y,wall.width,wall.height);
 	}
 }
