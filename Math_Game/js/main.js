@@ -45,6 +45,11 @@ var bulletObj = {
 	speed: 10,
 };
 
+var moveTop = false;
+var moveBottom = false;
+var moveLeft = false;
+var moveRight = false;
+
 
 var spriteArray = [];
 var bulletArray = [];
@@ -68,16 +73,33 @@ spriteArray.push(player);
 window.addEventListener("keydown", function(event){
 	switch(event.keyCode){
 		case 37:
-			player.x -= 5;
+			moveLeft = true;
 			break;
 		case 38:
-			player.y -= 5;
+			moveTop = true;
 			break;
 		case 39:
-			player.x += 5;
+			moveRight = true;
 			break;
 		case 40:
-			player.y += 5;
+			moveBottom = true;
+			break;
+	}
+});
+
+window.addEventListener("keyup", function(event){
+	switch(event.keyCode){
+		case 37:
+			moveLeft = false;
+			break;
+		case 38:
+			moveTop = false;
+			break;
+		case 39:
+			moveRight = false;
+			break;
+		case 40:
+			moveBottom = false;
 			break;
 	}
 });
@@ -120,6 +142,12 @@ function loadGame(){
 
 function update(){
 	requestAnimationFrame(update, canvas);
+
+	if(moveLeft) player.x -= 5;
+	if(moveRight) player.x += 5;
+	if(moveTop) player.y -= 5;
+	if(moveBottom) player.y += 5;
+
 	// console.log(zombie.curentFrame);
 	updateBullet();
 	render();
