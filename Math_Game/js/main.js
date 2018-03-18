@@ -14,6 +14,7 @@ var spriteObject = {
 	animation: true,
 	bullet: 100,
 	weapon: 1,
+	score: 0,
 	updateAnimation: function(){
 		this.sourceX = this.sourceWidth * (this.curentFrame % 5);
 		this.sourceY = 105 + (this.sourceHeight * Math.floor(this.curentFrame / 5));
@@ -78,13 +79,15 @@ for(var i = 0; i < 10; i++){
 }
 
 for(var i = 0; i < 10; i++){
-	var wall = Object.create(wallObj);
-	wall.width = 15;
-	wall.height = 15;
-	wall.y = 300;
-	wall.x = 150 + i * wall.width;
-	wall.break = true;
-	wallArray.push(wall);
+	for(var j = 0; j < 10; j++){
+		var wall = Object.create(wallObj);
+		wall.width = 15;
+		wall.height = 15;
+		wall.y = 300 + j * wall.height;
+		wall.x = 150 + i * wall.width;
+		wall.break = true;
+		wallArray.push(wall);
+	}
 }
 
 var canvas = document.querySelector("canvas");
@@ -220,6 +223,7 @@ function updateBullet(){
 					if(wall.break){
 						wallArray.splice(j,1);
 						bulletArray.splice(i,1);
+						player.score++;
 					}else{
 						bulletArray.splice(i,1);
 					}
@@ -236,6 +240,7 @@ function render(){
 	ctx.fillRect(0,0,canvas.width, canvas.height);
 	ctx.fillStyle = "white";
 	ctx.fillText("Ammo: " + player.bullet,5,30);
+	ctx.fillText("Score: " + player.score,180,30);
 	renderSprite();
 	renderWall();
 	renderBullet();
