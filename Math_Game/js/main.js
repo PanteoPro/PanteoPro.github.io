@@ -13,6 +13,7 @@ var spriteObject = {
 	active: true,
 	animation: true,
 	bullet: 100,
+	weapon: 1,
 	updateAnimation: function(){
 		this.sourceX = this.sourceWidth * (this.curentFrame % 5);
 		this.sourceY = 105 + (this.sourceHeight * Math.floor(this.curentFrame / 5));
@@ -103,6 +104,7 @@ player.animation = false;
 spriteArray.push(player);
 
 window.addEventListener("keydown", function(event){
+	console.log(event.keyCode);
 	switch(event.keyCode){
 		case 37:
 			moveLeft = true;
@@ -115,6 +117,15 @@ window.addEventListener("keydown", function(event){
 			break;
 		case 40:
 			moveBottom = true;
+			break;
+		case 49:
+			player.weapon = 1;
+			break;
+		case 50:
+			player.weapon = 2;
+			break;
+		case 51:
+			player.weapon = 3;
 			break;
 	}
 });
@@ -150,10 +161,18 @@ canvas.addEventListener("mousedown", function(event){
 		var giput = Math.sqrt(Math.pow(changeX, 2) + Math.pow(changeY,2));
 
 		var bullet = Object.create(bulletObj);
+		if(player.weapon === 2){
+			bullet.width = 30;
+			bullet.height = 30;
+		}
+		if(player.weapon === 3){
+			bullet.width = 120;
+			bullet.height = 120;
+		}
 		bullet.vx = changeX/giput;
 		bullet.vy = changeY/giput;
-		bullet.x = playerX;
-		bullet.y = playerY;
+		bullet.x = playerX - bullet.width/2;
+		bullet.y = playerY - bullet.height/2;
 
 		bulletArray.push(bullet);
 		player.bullet--;
