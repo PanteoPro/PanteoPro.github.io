@@ -65,7 +65,7 @@ var moveLeft = false;
 var moveRight = false;
 
 
-
+var GAME = 1;
 
 var spriteArray = [];
 var bulletArray = [];
@@ -179,6 +179,7 @@ canvas.addEventListener("mousedown", function(event){
 
 		bulletArray.push(bullet);
 		player.bullet--;
+		if(player.bullet === 0) GAME = 0;
 	}
 });
 
@@ -235,15 +236,24 @@ function updateBullet(){
 
 function render(){
 	ctx.clearRect(0,0,canvas.width, canvas.height);
-	ctx.font = "30px Arial"; 
-	ctx.fillStyle = "black";
-	ctx.fillRect(0,0,canvas.width, canvas.height);
-	ctx.fillStyle = "white";
-	ctx.fillText("Ammo: " + player.bullet,5,30);
-	ctx.fillText("Score: " + player.score,180,30);
-	renderSprite();
-	renderWall();
-	renderBullet();
+	if(GAME){
+		ctx.font = "30px Arial"; 
+		ctx.fillStyle = "black";
+		ctx.fillRect(0,0,canvas.width, canvas.height);
+		ctx.fillStyle = "white";
+		ctx.fillText("Ammo: " + player.bullet,5,30);
+		ctx.fillText("Score: " + player.score,180,30);
+		renderSprite();
+		renderWall();
+		renderBullet();
+	} else {
+		ctx.font = "50px Arial"; 
+		ctx.fillStyle = "black";
+		ctx.fillRect(0,0,canvas.width, canvas.height);
+		ctx.fillStyle = "white";
+		ctx.textAlign = "center";
+		ctx.fillText("END GAME Your Score: " + player.score, canvas.width/2, canvas.height/2);
+	}
 }
 
 function renderSprite(){
