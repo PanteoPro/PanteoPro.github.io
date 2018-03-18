@@ -59,6 +59,31 @@ var wallObj = {
 	break: false
 }
 
+var enemyObj = {
+	sourceX: 0,
+	sourceY: 0,
+	sourceWidth: 100,
+	sourceHeight: 100,
+	x: 0,
+	y: 0,
+	width: 50,
+	height: 50,
+	pathX: 200,
+	pathY: 100,
+	startX: 0,
+	startY: 0,
+	side: 0,
+	timeToShot: 10,
+	timeRightNow: 0,
+	interval: undefined,
+	shot: false,
+	timer: function(){
+		var self = this;
+		this.interval = setTimeout(function(){self.timeRightNow++; self.timer()}, 100);
+		if(this.timeRightNow === this.timeToShot){this.shot = true; this.timeRightNow = 0}
+	}
+};
+
 var moveTop = false;
 var moveBottom = false;
 var moveLeft = false;
@@ -70,6 +95,23 @@ var GAME = 1;
 var spriteArray = [];
 var bulletArray = [];
 var wallArray = [];
+var enemyArray = [];
+
+var enemy = Object.create(enemyObj);
+enemy.x = 130;
+enemy.y = 180;
+
+var enemy1 = Object.create(enemyObj);
+enemy1.x = 130;
+enemy1.y = 180;
+enemy1.pathX = 20;
+enemy1.pathY = 300;
+
+enemy.timer();
+enemy1.timer();
+
+enemyArray.push(enemy);
+enemyArray.push(enemy1);
 
 for(var i = 0; i < 10; i++){
 	var wall = Object.create(wallObj);
@@ -179,7 +221,6 @@ canvas.addEventListener("mousedown", function(event){
 
 		bulletArray.push(bullet);
 		player.bullet--;
-		if(player.bullet === 0) GAME = 0;
 	}
 });
 
@@ -203,8 +244,11 @@ function update(){
 	if(moveTop) player.y -= 5;
 	if(moveBottom) player.y += 5;
 
+	if(bulletArray.length === 0 && player.bullet === 0) GAME = 0;
+
 	// console.log(zombie.curentFrame);
 	updateBullet();
+	updateEnemy();
 	render();
 }
 
@@ -234,6 +278,69 @@ function updateBullet(){
 	}
 }
 
+function updateEnemy(){
+	for(var i = 0; i < enemyArray.length; i++){
+		var enemy = enemyArray[i];
+		switch(enemy.side){
+			case 0:
+				enemy.x += 5;
+				enemy.startX += 5;
+				if(enemy.startX >= enemy.pathX){
+					enemy.side = 1;
+				}
+				break;
+			case 1:
+				enemy.y += 5;
+				enemy.startY += 5;
+				if(enemy.startY >= enemy.pathY){
+					enemy.side = 2;
+				}
+				break;
+			case 2:
+				enemy.x -= 5;
+				enemy.startX -= 5;
+				if(enemy.startX <= 0){
+					enemy.side = 3;
+				}
+				break;
+			case 3:
+				enemy.y -= 5;
+				enemy.startY -= 5
+				if(enemy.startY <= 0){
+					enemy.side = 0;
+				}
+				break;
+		}
+
+		if(enemy.shot){
+
+			var bullet = Object.create(bulletObj);
+
+			var enemyX = enemy.x + enemy.width/2;
+			var enemyY = enemy.y + enemy.height/2;
+
+			var playerX = player.x + player.width/2;
+			var playerY = player.y + player.height/2;
+
+			var changeX = playerX - enemyX;
+			var changeY = playerY - enemyY;
+
+			var gipot = Math.sqrt(Math.pow(changeX,2) + Math.pow(changeY,2));
+
+			bullet.x = enemyX;
+			bullet.y = enemyY;
+			bullet.vx = changeX/gipot;
+			bullet.vy = changeY/gipot;
+
+			bulletArray.push(bullet);
+
+			enemy.shot = 0;
+
+		}
+
+	}
+}
+
 function render(){
 	ctx.clearRect(0,0,canvas.width, canvas.height);
 	if(GAME){
@@ -244,6 +351,7 @@ function render(){
 		ctx.fillText("Ammo: " + player.bullet,5,30);
 		ctx.fillText("Score: " + player.score,180,30);
 		renderSprite();
+		renderEnemy();
 		renderWall();
 		renderBullet();
 	} else {
@@ -283,5 +391,15 @@ function renderWall(){
 			wall.sourceX,wall.sourceY,
 			wall.sourceWidth,wall.sourceHeight,
 			wall.x,wall.y,wall.width,wall.height);
+	}
+}
+
+function renderEnemy(){
+	for(var i = 0; i < enemyArray.length; i++){
+		enemy = enemyArray[i];	
+		ctx.drawImage(spriteImage,
+			enemy.sourceX,enemy.sourceY,
+			enemy.sourceWidth,enemy.sourceHeight,
+			enemy.x,enemy.y,enemy.width,enemy.height);
 	}
 }
