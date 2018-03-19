@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas</title>
+	<script>
+		window.onload = function(){
+			var canvas = document.querySelector("canvas");
+			var ctx = canvas.getContext("2d");
+
+			var buttons = document.querySelectorAll("button");
+
+			for(var i = 0; i < buttons.length; i++){
+				buttons[i].addEventListener("mousedown", pressButton);
+			}
+
+			var drawMode = 0;
+
+			canvas.addEventListener("mousedown", function(event){
+				ctx.beginPath();
+				ctx.moveTo(mousePos(event)[0], mousePos(event)[1]);
+				drawMode = 1;
+				drawLine(event);
+			});
+
+			canvas.addEventListener("mouseup", function(event){
+				drawMode = 0;
+			});
+
+			canvas.addEventListener("mousemove", drawLine);
+
+			function pressButton(event){
+				button = event.target;
+				var outputError = document.querySelector("#errorsOutput");
+				outputError.innerHTML = "";
+				switch(button.id){
+					case "red":
+						ctx.strokeStyle = "red";
+						break;
+					case "green":
+						ctx.strokeStyle = "green";
+						break;
+					case "blue":
+						ctx.strokeStyle = "blue";
+						break;
+					case "clear":
+						ctx.strokeStyle = "white";
+						break;
+					case "size":
+						ctx.lineWidth = document.querySelector("#sizeInput").value;
+						break;
+					case "color":
+						var color = document.querySelector("#colorInput").value;
+						var hash = 0;
+						if(!hash) {color = "#" + color;}
+
+						if(color[0] === "#") hash = 1;
+						if(color.length < 3) {outputError.innerHTML = "Invalid color! Please inter color like 'FFC' or 'FFFCC2' or '#FF3' or '#23CD11' ";break;}
+						if(color.length > 6 && !hash || color.length > 7 && hash){outputError.innerHTML = "Invalid color! Please inter color like 'FFC' or 'FFFCC2' or '#FF3' or '#23CD11' ";break;}
+						ctx.strokeStyle = color;
+				}
+			}
+
+			function drawLine(event){
+				if(drawMode){
+					var mouseX = event.pageX - canvas.offsetLeft;
+					var mouseY = event.pageY - canvas.offsetTop;
+
+					ctx.lineTo(mouseX,mouseY);
+					ctx.stroke();
+				}
+			}
+
+			function mousePos(event){
+				var mouseX = event.pageX - canvas.offsetLeft;
+				var mouseY = event.pageY - canvas.offsetTop;
+
+				return [mouseX, mouseY];
+			}
+
+			ctx.beginPath();
+			ctx.strokeStyle = "#415151";
+			ctx.lineWidth = 10;
+			ctx.lineCap = "round";
+			ctx.lineJoin = "round";
+		};
+	</script>
+</head>
+<body>
+	
+	<h2>Lines on canvas</h2>
+	<canvas width=800 height=300 style="border: 1px solid #123123"></canvas>
+	<p id="errorsOutput" style="color: red"></p>
+	<hr>
+	<button id="red">Red</button>
+	<button id="green">Green</button>
+	<button id="blue">Blue</button>
+	<button id="clear">Clear</button>
+	<br>
+	<input type="text" id="sizeInput">
+	<button id="size">Size</button>
+	<input type="text" id="colorInput">
+	<button id="color">Color</button>
+
+	
+</body>
+</html>
