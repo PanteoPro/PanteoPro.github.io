@@ -16,51 +16,6 @@
 
 			var drawMode = 0;
 
-			canvas.addEventListener("touchdown", function(event){
-				ctx.beginPath();
-				ctx.moveTo(mousePos(event)[0], mousePos(event)[1]);
-				drawMode = 1;
-				drawLine(event);
-			});
-
-			canvas.addEventListener("touchup", function(event){
-				drawMode = 0;
-			});
-
-			canvas.addEventListener("touchmove", drawLine);
-
-			function pressButton(event){
-				button = event.target;
-				var outputError = document.querySelector("#errorsOutput");
-				outputError.innerHTML = "";
-				switch(button.id){
-					case "red":
-						ctx.strokeStyle = "red";
-						break;
-					case "green":
-						ctx.strokeStyle = "green";
-						break;
-					case "blue":
-						ctx.strokeStyle = "blue";
-						break;
-					case "clear":
-						ctx.strokeStyle = "white";
-						break;
-					case "size":
-						ctx.lineWidth = document.querySelector("#sizeInput").value;
-						break;
-					case "color":
-						var color = document.querySelector("#colorInput").value;
-						var hash = 0;
-						if(!hash) {color = "#" + color;}
-
-						if(color[0] === "#") hash = 1;
-						if(color.length < 3) {outputError.innerHTML = "Invalid color! Please inter color like 'FFC' or 'FFFCC2' or '#FF3' or '#23CD11' ";break;}
-						if(color.length > 6 && !hash || color.length > 7 && hash){outputError.innerHTML = "Invalid color! Please inter color like 'FFC' or 'FFFCC2' or '#FF3' or '#23CD11' ";break;}
-						ctx.strokeStyle = color;
-				}
-			}
-
 			canvas.addEventListener("mousedown", function(event){
 				ctx.beginPath();
 				ctx.moveTo(mousePos(event)[0], mousePos(event)[1]);
@@ -97,11 +52,12 @@
 					case "color":
 						var color = document.querySelector("#colorInput").value;
 						var hash = 0;
-						if(!hash) {color = "#" + color;}
-
 						if(color[0] === "#") hash = 1;
-						if(color.length < 3) {outputError.innerHTML = "Invalid color! Please inter color like 'FFC' or 'FFFCC2' or '#FF3' or '#23CD11' ";break;}
-						if(color.length > 6 && !hash || color.length > 7 && hash){outputError.innerHTML = "Invalid color! Please inter color like 'FFC' or 'FFFCC2' or '#FF3' or '#23CD11' ";break;}
+						if(!hash) {color = "#" + color;}
+						console.log(color);
+
+						if(color.length < 4) {outputError.innerHTML = "Invalid color! Please inter color like 'FFC' or 'FFFCC2' or '#FF3' or '#23CD11' ";break;}
+						if(color.length > 7 && !hash || color.length > 8 && hash){outputError.innerHTML = "Invalid color! Please inter color like 'FFC' or 'FFFCC2' or '#FF3' or '#23CD11' ";break;}
 						ctx.strokeStyle = color;
 				}
 			}
