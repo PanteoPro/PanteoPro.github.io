@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas Properties</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/main.css">
+	<script src="js/main.js"></script>
+</head>
+<body>
+	
+	<div id="wrapper">
+		
+		<h1>Canvas Properties</h1>
+
+		<!-- .example>h2{Title}+.row>.col.canvas>canvas[width=500 height=250 id=canvas$]^.col>.information>h3{This code do this}+p{Some Code canvas.getContext("2d")} -->
+
+		<div class="example">
+			<h2>Fill Rect</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas1"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.fillStyle = "#4141ca"; - Стиль заполнения<br>
+							ctx.fillRect(x,y,width,height); - Заполняет 
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Fill and Stroke</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas2"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.strokeStyle = "#4141ca" - Стиль обрарамления<br>
+							ctx.lineWidth = 5 - Толщина вооброжаемого карандаша<br>
+							ctx.strokeRect(x,y,width,height) - Обрамляет
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Lines</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas3"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.strokeStyle - Также изменяет стиль линий 
+							ctx.clearRect(x,y,width,height) - Очищает указанный прямоугольник<br>
+							ctx.moveTo(x,y) - Перемещает вооброжаемый карандаш<br>
+							ctx.lineTo(x,y) - Рисует линию от текущей точки<br>
+							ctx.lineWidth = 5 - Толщина вооброжаемого карандаша<br>
+							ctx.lineCap - Как линия заканчиваются (butt(default), round, square)<br>
+							ctx.lineJoin - Как линии соеденияются (round, bevel, miter(default))<br>
+							ctx.miterLimit - Ограничение соедений линий<br>
+							ctx.beginPath() - Новый набор операций по рисованию<br>
+							ctx.stroke() - Собирает все текущие команды по путям и рисует их
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Save and Restore</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas4"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.save() - Сохраняет текущее состояние ctx<br>
+							ctx.restore() - Возвращает сохраненное состояние ctx
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Arcs and path</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas5"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.beginPath() - открываем<br>
+							ctx.arc(x,y,r,sA,eA,aC) - x,y - центр | r - радиус | sA - начальный угол | eA - конечный угол | aC - в какую сторону true false<br>
+							ctx.arcTo(x1,y1,x2,y2,r)<br>
+							ctx.fill() - Заполняет круг<br>
+							var radians = (Math.PI / 180) * degress<br>
+							ctx.closePath() - закрываем
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Curves</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas6"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.bezierCurveTo(cx1,cy1,cx2,cy2,end1,end2) - cx,cy - контрольные точки<br>
+							ctx.quadraticCurveTo(cx,cy,x,y);
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Text</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas7"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.font -"12px Impact" шрифт как в css<br>
+							ctx.textAling - start(default), end, left, right, center<br>
+							ctx.textBaseline - top, hanging, middle, alphabetic(default), ideographic, bottom<br>
+							ctx.fillText(txt,x,y,[maxWidth]) - Заполнить текст<br>
+							ctx.strokeText(txt,x,y,[maxWidth]) - Заполнить текст<br>
+							ctx.measureText(text) - Вернет размерные показатели строки, которые передашь
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Shadows</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas8"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.shadowColor = "#13c1ca" - Цвет тени<br>
+							ctx.shadowOffsetX = -5 - Смещение тени по X<br>
+							ctx.shadowOffsetН = -5 - Смещение тени по Y<br>
+							ctx.shadowBlur = 5 - Размытие тени
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Patterns</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas9"></canvas>
+					<canvas width="30" height="30" id="patCanvas9" style="display: none"></canvas>
+					<video id="vidCanvas" src="img/video.mp4" controls style="display: none"></video>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.createPattern(elem, repeat) - Создает патерн elem - рисунок, видео, canvas | repeat, no-repeat repeat-x repeat-y
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Gradients</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas10"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							var linGrd = ctx.createLinearGradient(x0,y0,x1,y1) - Создает градиент от точки до точки<br>
+							var radGrd = ctx.createRadialGradient(x0,y0,r0,x1,y1,r1) - Создает радиальный градиент<br>
+							linGrd.addColorStop(postion,color) - Добавить цвет | position 0.0 - 1.0
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
