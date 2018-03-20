@@ -206,6 +206,61 @@
 				</div>
 			</div>
 		</div>
+		<div class="example">
+			<h2>Clipping Paths</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="250" height="250" id="canvas11_1"></canvas>
+					<canvas width="250" height="250" id="canvas11_2"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.drawImage(image,sX,sY,sW,sH,x,y,w,h)
+							clip() - Делает маской нарисованную фигуру
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Transformations</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas12"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.translate(x,y); - перемещает ctx<br>
+							ctx.scale(x,y); - маштабирование, множитель<br>
+							ctx.rotate(angle) - Поворот ctx<br>
+							ctx.transform(a,b,c,d,e,f) - Добавляется к другим трасформациям<br>
+							ctx.setTrasform(a,b,c,d,e,f) - Убирает предыдущие трасформации и устанавливает эту
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="example">
+			<h2>Compositing and Gloabal Alpha</h2>
+			<div class="row">
+				<div class="col canvas">
+					<canvas width="500" height="250" id="canvas13"></canvas>
+				</div>
+				<div class="col">
+					<div class="information">
+						<h3>Information</h3>
+						<p>
+							ctx.globalAlpha = 0.5 - Глобальная прозрачность
+							ctx.globalCompositeOperation = "" - Вид композиции
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	</div>
 
