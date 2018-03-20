@@ -272,7 +272,7 @@ window.onload = function(){
 		var ctx1 = canvas1.getContext("2d");
 		var ctx2 = canvas2.getContext("2d");
 		if(ctx1){
-			var img = new Image();
+			var img1 = new Image();
 
 			ctx1.strokeStyle = "#213125";
 			ctx1.lineWidth = 10;
@@ -288,11 +288,11 @@ window.onload = function(){
 			ctx2.closePath();
 			ctx2.clip();
 
-			img.onload = function(){
-				ctx1.drawImage(img,0,100,250,250,0,0,250,250);
-				ctx2.drawImage(img,0,100,250,250,0,0,250,250);
+			img1.onload = function(){
+				ctx1.drawImage(img1,0,100,250,250,0,0,250,250);
+				ctx2.drawImage(img1,0,100,250,250,0,0,250,250);
 			}
-			img.src = "img/sprites2.png";
+			img1.src = "img/sprites2.png";
 		}
 	}
 
