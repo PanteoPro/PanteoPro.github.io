@@ -194,7 +194,7 @@ function update(){
 function render(){
 	ctx.clearRect(0,0,canvas.width, canvas.height);
 	ctx.save();
-	ctx.translate(-camera.x, -camera.y)
+	ctx.translate(-camera.x,-camera.y);
 	if(spriteArray !== 0){
 		for(var i = 0; i < spriteArray.length; i++){
 			sprite = spriteArray[i];
