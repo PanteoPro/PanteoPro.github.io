@@ -93,6 +93,8 @@ var camera = {
 camera.x = gameWorld.width/2 - camera.width/2;
 camera.y = gameWorld.height/2 - camera.height/2;
 
+var koef = 0.6;
+
 var cat = Object.create(spriteObj);
 cat.x = gameWorld.width/2 - cat.width/2;
 cat.y = gameWorld.height/2 - cat.height/2;
@@ -134,17 +136,19 @@ function update(){
 	cat.x = Math.max(0,Math.min(cat.x + cat.vx, gameWorld.width - cat.width));
 	cat.y = Math.max(0,Math.min(cat.y + cat.vy, gameWorld.height - cat.height));
 
-	if(cat.x < camera.leftInnerBorder()){
+	console.log(camera.leftInnerBorder()/koef);
+
+	if(cat.x < camera.leftInnerBorder()/koef){
 		camera.x = Math.floor(cat.x - (camera.width * 0.25));
 	}
-	if(cat.x > camera.rightInnerBorder()){
+	if(cat.x + cat.width > camera.rightInnerBorder()/koef){
 		camera.x = Math.floor(cat.x + cat.width - (camera.width * 0.75));
 	}
-	if(cat.y < camera.topInnerBorder()){
-		camera.y = Math.floor(cat.y - (camera.width * 0.25));
+	if(cat.y < camera.topInnerBorder()/koef){
+		camera.y = Math.floor(cat.y - (camera.height * 0.25));
 	}
-	if(cat.y > camera.bottomInnerBorder()){
-		camera.y = Math.floor(cat.y + cat.height - (camera.width * 0.75));
+	if(cat.y + cat.height > camera.bottomInnerBorder()/koef){
+		camera.y = Math.floor(cat.y + cat.height - (camera.height * 0.75));
 	}
 
 	render();
@@ -154,14 +158,14 @@ function update(){
 function render(){
 	ctx.clearRect(0,0,canvas.width,canvas.height);
 	ctx.save();
-	ctx.translate(-camera.x, -camera.y)
+	ctx.translate(-camera.x*koef, -camera.y*koef)
 	if(spriteArray !== 0){
 		for(var i = 0; i < spriteArray.length; i++){
-			sprite = spriteArray[i];
+			var sprite = spriteArray[i];
 			ctx.drawImage(spriteImage,
 				sprite.sourceX, sprite.sourceY,
 				sprite.sourceWidth, sprite.sourceHeight,
-				sprite.x, sprite.y, sprite.width, sprite.height);
+				sprite.x*koef, sprite.y*koef, sprite.width*koef, sprite.height*koef);
 		}
 	}
 	ctx.restore();

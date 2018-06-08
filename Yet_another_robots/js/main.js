@@ -20,6 +20,10 @@ window.onload = function(){
 		this.moveLeft = false;
 		this.moveBottom = false;
 		this.moveRight = false;
+		this.UP = 87;
+		this.RIGHT = 68;
+		this.DOWN = 83;
+		this.LEFT = 65;
 		this.shot = function(){
 			var playerX = this.x - camera.x + this.width/2;
 			var playerY = this.y - camera.y + this.height/2;
@@ -80,19 +84,19 @@ window.onload = function(){
 
 	PlayerObject.prototype.moveOn = function(key,self){
 		switch(key){
-			case 37:
+			case self.LEFT:
 				self.moveLeft = true;
 				this.pressButtonsNum++;
 				break;
-			case 38:
+			case self.UP:
 				self.moveTop = true;
 				this.pressButtonsNum++;
 				break;
-			case 39:
+			case self.RIGHT:
 				self.moveRight = true;
 				this.pressButtonsNum++;
 				break;
-			case 40:
+			case self.DOWN:
 				self.moveBottom = true;
 				this.pressButtonsNum++;
 				break;
@@ -101,19 +105,19 @@ window.onload = function(){
 
 	PlayerObject.prototype.moveOff = function(key,self){
 		switch(key){
-			case 37:
+			case self.LEFT:
 				self.moveLeft = false;
 				this.pressButtonsNum--;
 				break;
-			case 38:
+			case self.UP:
 				self.moveTop = false;
 				this.pressButtonsNum--;
 				break;
-			case 39:
+			case self.RIGHT:
 				self.moveRight = false;
 				this.pressButtonsNum--;
 				break;
-			case 40:
+			case self.DOWN:
 				self.moveBottom = false;
 				this.pressButtonsNum--;
 				break;
@@ -203,8 +207,8 @@ window.onload = function(){
 	player.x = gameWorld.width/2 - player.width/2;
 	player.y = gameWorld.height/2 - player.height/2;
 
-	camera.x = gameWorld.width/2 - camera.width/2 - player.width/2;
-	camera.y = gameWorld.height/2 - camera.height/2 - player.height/2;
+	camera.x = gameWorld.width/2 - camera.width/2;
+	camera.y = gameWorld.height/2 - camera.height/2;
 
 	spritesArray.push(background);
 	spritesArray.push(player);
@@ -287,10 +291,6 @@ window.onload = function(){
 			}
 		}
 		mainCtx.strokeRect(camera.x+10,camera.y+10,gameWorld.width/30,gameWorld.height/30);
-
-		// Player DRAW
-		// mainCtx.drawImage(mainImage,player.sourceX,player.sourceY,player.sourceWidth,player.sourceHeight,player.x,player.y,player.width,player.height);
-		// ------------
 
 		// Bullet DRAW
 		for(var i = 0; i < bulletArray.length; i++){

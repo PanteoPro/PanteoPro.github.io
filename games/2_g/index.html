@@ -1,0 +1,316 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Game 2</title>
+<canvas width="550" height="300" style="border: 1px dashed black"></canvas>
+<script>
+//--- Объект спрайта
+var spriteObject = {
+	sourceX: 0,
+	sourceY: 0,
+	sourceWidth: 64,
+	sourceHeight: 64,
+	x: 0,
+	y: 0,
+	width: 64,
+	height: 64,
+	vx: 0,
+	vy: 0,
+};
+//--- Основная программа
+//Холст и его поверхность рисования
+var canvas = document.querySelector("canvas");
+var drawingSurface = canvas.getContext("2d");
+//Массив игровых спрайтов
+var sprites = [];
+//Создание спрайта distantBackground
+var distantBackground = Object.create(spriteObject);
+distantBackground.sourceY = 364;
+distantBackground.sourceWidth = 1280;
+distantBackground.sourceHeight = 300;
+distantBackground.width = 1280;
+distantBackground.height = 300;
+distantBackground.x = 0;
+distantBackground.y = 0;
+distantBackground.vx = -4;
+var distantBackground2 = Object.create(distantBackground);
+distantBackground2.x = distantBackground2.width;
+sprites.push(distantBackground);
+sprites.push(distantBackground2);
+//Создание спрайта foreground
+var foreground = Object.create(spriteObject);
+foreground.sourceY = 64;
+foreground.sourceWidth = 1280;
+foreground.sourceHeight = 300;
+foreground.width = 1280;
+foreground.height = 300;
+foreground.x = 0;
+foreground.y = 0;
+foreground.vx = -2;
+var foreground2 = Object.create(foreground);
+foreground2.x = foreground2.width;
+sprites.push(foreground);
+sprites.push(foreground2);
+
+var walls = [];
+
+//Создание объектов gameWorld и camera
+
+var gameTimer = {
+	T: 3,
+	time: 0,
+	interval: undefined,
+	start: function(){
+		var self = this;
+		this.time = this.T;
+		this.interval = setInterval(function(){self.tick();},1000);
+	},
+	tick: function(){
+		this.time--;
+	},
+	tap: function(){
+		this.time = this.T;
+	},
+	stop: function(){
+		clearInterval(this.interval);
+	}
+};
+
+var gameWorld = {
+	x: 0,
+	y: 0,
+	width: foreground.width,
+	height: foreground.height
+};
+//Камера имеет 2 новых свойства: "vx" и "previousX"
+var camera = {
+	x: 0,
+	y: 0,
+	width: canvas.width,
+	height: canvas.height,
+	vx: 0,
+	previousX: 0,
+	//Внутренняя рамка камеры
+	rightInnerBoundary: function(){
+		return this.x + (this.width * 0.75);
+	},
+	leftInnerBoundary: function(){
+		return this.x + (this.width * 0.25);
+	},
+	bottomInnerBoundary: function(){
+		return this.y + (this.height - 64);
+	},
+	topInnerBoundary: function(){
+		return this.y + 64;
+	}
+};
+//Центрирование камеры в игровом мире
+camera.x = (gameWorld.x + gameWorld.width / 2) - camera.width / 2;
+camera.y = (gameWorld.y + gameWorld.height / 2) - camera.height / 2;
+//Создание спрайта кошки и центрирование его
+var cat = Object.create(spriteObject);
+cat.height = 32;
+cat.width = 32;
+cat.x = 50;
+cat.y = 30;
+sprites.push(cat);
+//Загрузка набора фреймов
+var image = new Image();
+image.addEventListener("load", loadHandler, false);
+image.src = "sprites.png";
+//Коды клавиш со стрелками
+var SPACE = 32;
+var score = 0;
+var gameStatus = true;
+//Направления движения
+var moveRight = false;
+var moveLeft = false;
+var fly = false;
+
+var wallObject = Object.create(spriteObject);
+wallObject.sourceX = 64;
+wallObject.vx = -4;
+wallObject.x = camera.width;
+wallObject.score = false;
+
+//Обработчик событий нажатия клавиш клавиатуры
+window.addEventListener("keydown", function(event){
+	switch(event.keyCode){
+		case SPACE:
+			fly = true;
+			break;
+	}
+}, false);
+//Обработчик событий отпускания клавиш клавиатуры
+window.addEventListener("keyup", function(event){
+	switch(event.keyCode){
+	case SPACE:
+		fly = false;
+		break;
+	}
+}, false);
+
+function loadHandler(){
+	gameTimer.start();
+	update();
+}
+
+function update(){
+
+	if(!gameTimer.time){
+		gameTimer.tap();
+		var wall1 = Object.create(wallObject);
+		var wall2 = Object.create(wallObject);
+		wall2.score = true;
+		switch(Math.floor(Math.random()*4)){
+			case 0:
+				wall1.height = 120;
+				wall2.height = 50;
+				wall2.y = gameWorld.height-64-50;
+				break;
+			case 1:
+				wall1.height = 50;
+				wall2.height = 120;
+				wall2.y = gameWorld.height-64-120;
+				break;
+			case 2:
+				wall1.height = 70;
+				wall2.height = 70;
+				wall2.y = gameWorld.height-64-70;
+			case 3:
+				wall1.height = 140;
+				wall2.height = 33;
+				wall2.y = gameWorld.height-64-33;
+		}
+		walls.push(wall1);
+		walls.push(wall2);
+	}
+	
+	if(foreground.x + foreground.width < 0)
+		foreground.x = foreground.width;
+	if(foreground2.x + foreground2.width < 0)
+		foreground2.x = foreground2.width;
+
+	if(distantBackground.x + distantBackground.width < 0)
+		distantBackground.x = distantBackground2.x + distantBackground2.width;
+	if(distantBackground2.x + distantBackground2.width < 0)
+		distantBackground2.x = distantBackground.x + distantBackground.width;
+
+
+	if(fly){
+		cat.vy = -3;
+	}
+
+	if(!fly && cat.y + cat.height < gameWorld.height - 64){
+		cat.vy = 2;
+	}
+
+	if(cat.y < 0){
+		cay.y = 0;
+	}
+	//Если ни одна из клавиш не нажата, скорость перемещения 0
+	if(cat.y + cat.height > gameWorld.height - 64){
+		cat.y = gameWorld.height - 64 - cat.height;
+		cat.vy = 0;
+	}
+	//Перемещение спрайта кошки внутри границ gameWorld
+	cat.y = Math.max(0, Math.min(cat.y + cat.vy, gameWorld.height - cat.height));
+	//Прокрутка камеры
+	if(cat.x < camera.leftInnerBoundary()){
+		camera.x = Math.floor(cat.x - (camera.width * 0.25));
+	}
+	if(cat.x + cat.width > camera.rightInnerBoundary()){
+		camera.x = Math.floor(cat.x + cat.width - (camera.width * 0.75));
+	}
+	//Блокирование перемещения камеры у границ gameWorld
+	if(camera.x < gameWorld.x){
+		camera.x = gameWorld.x;
+	}
+	if(camera.x + camera.width > gameWorld.x + gameWorld.width){
+		camera.x = gameWorld.x + gameWorld.width - camera.width;
+	}
+	//Вычисление скорости камеры, как разности
+	//ее позиций в этом и предыдущем кадре
+	camera.vx = camera.x - camera.previousX;
+	//Перемещение фона distantBackground с замедленной скоростью
+	distantBackground.x += camera.vx / 2;
+	//Сохранение текущей X-позиции камеры, чтобы использовать ее
+	//как previousX в следующем кадре
+
+	foreground.x += foreground.vx;
+	foreground2.x += foreground2.vx;
+
+	distantBackground.x += distantBackground.vx;
+	distantBackground2.x += distantBackground2.vx;
+
+	if(walls.length !== 0){
+		for(var i = 0; i < walls.length; i++){
+			var wall = walls[i];
+			wall.x += wall.vx;
+
+			if(!wall.score){
+				if(cat.x > wall.x + wall.width){
+					score++;
+					wall.score = true;
+				}
+			}
+
+			if((cat.x > wall.x && cat.x < wall.x + wall.width) || (cat.x + cat.width > wall.x && cat.x + cat.width < wall.x + wall.width)){
+				if((cat.y > wall.y && cat.y < wall.y + wall.height) || (cat.y + cat.height > wall.y && cat.y + cat.height < wall.y + wall.height)){
+					endGame();
+				}
+			}
+
+		}
+	}
+
+	camera.previousX = camera.x;
+	if(gameStatus){
+		requestAnimationFrame(update, canvas);
+		render();
+	}
+}
+
+function render(event){
+	drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
+	drawingSurface.save();
+	//Смещение холста в соответствии с положением камеры
+	drawingSurface.translate(-camera.x, -camera.y);
+	//Перебор спрайтов и использование их свойств для отображения
+	if(sprites.length !== 0){
+		for(var i = 0; i < sprites.length; i++){
+			var sprite = sprites[i];
+			drawingSurface.drawImage(image,
+			sprite.sourceX, sprite.sourceY,
+			sprite.sourceWidth, sprite.sourceHeight,
+			Math.floor(sprite.x), Math.floor(sprite.y),
+			sprite.width, sprite.height);
+		}
+	}
+	if(walls.length !== 0){
+		for(var i = 0; i < walls.length; i++){
+			var sprite = walls[i];
+			if(sprite.x + sprite.width > 0){
+				drawingSurface.drawImage(image,
+				sprite.sourceX, sprite.sourceY,
+				sprite.sourceWidth, sprite.sourceHeight,
+				Math.floor(sprite.x), Math.floor(sprite.y),
+				sprite.width, sprite.height);
+			} else {
+				walls.splice(i,1);
+			}
+		}
+	}
+	drawingSurface.font = "30px Impact";
+	drawingSurface.fillText("Score: " + score,5,30);
+	drawingSurface.restore();
+}
+
+function endGame(){
+	gameTimer.stop();
+	gameStatus = false;
+
+	drawingSurface.clearRect(0,0,canvas.width,canvas.height);
+	drawingSurface.font = "35px Impact";
+	drawingSurface.fillText("Your Score: " + score, canvas.width/2-80, canvas.height/2 - 15)
+}
+</script>

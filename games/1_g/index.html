@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Game_1</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#game {
+			position: relative;
+		}
+		canvas{
+			position: absolute;
+			border: 1px solid #251caa;
+		}
+	</style>
+</head>
+<body>
+	
+	<div id="game">
+		
+	</div>
+	<p id="output" style="margin-left: 40px; padding-top: 320px">Score 0 | Time 30</p>
+
+
+	<script>
+		
+		var output = document.querySelector("#output");
+
+		var monsterCanvases = [];
+		var monsterObjects = [];
+		var monsterCtx = [];
+		var SIZE = 100;
+		var COLUMN = 4;
+		var ROW = 3;
+		var PADDING = 5;
+		var score = 0;
+
+		var game = document.querySelector("#game");
+
+		var gameTimer = {
+			time: 0,
+			interval: undefined,
+			start: function(){
+				var self = this;
+				this.interval = setInterval(function(){self.tick();},1000);
+			},
+			tick: function(){
+				this.time--;
+			},
+			stop: function(){
+				clearInterval(this.interval);
+			},
+			reset: function(){
+				this.time = 0;
+			}
+		};
+
+		var monster = {
+			image: "sprite.png",
+			sourceX: 0,
+			sourceY: 0,
+			sourceWidth: 50,
+			sourceHeight: 50,
+			x: 0,
+			y: 0,
+			SIZE: SIZE,
+			HIDDING: 0,
+			JUMPING: 1,
+			HIT: 2,
+			state: 0,
+			currentFrame: 0,
+			maxFrame: 4,
+			forward: true,
+			waitTime: undefined,
+			resetCounter: 0,
+			timeToReset: 9,
+			updateAnimation: function(){
+
+				this.sourceX = this.sourceWidth * (this.currentFrame % 3);
+				this.sourceY = this.sourceHeight * Math.floor(this.currentFrame / 3);
+
+
+				if(this.state !== this.HIT){
+					if(this.waitTime > 0 || this.waitTime === undefined){
+						this.state = this.HIDDING;
+					} else {
+						this.state = this.JUMPING;
+					}
+				}
+
+				switch(this.state){
+					case this.HIDDING:
+						this.currentFrame = 0;
+						this.waitTime--;
+						break;
+					case this.JUMPING:
+						if(this.currentFrame === this.maxFrame){
+							this.forward = false;
+						}
+						if(this.currentFrame === 0 && this.forward === false){
+							this.forward = true;
+							this.findWaitTime();
+							this.state = this.HIDDING;
+							break;
+						}
+						if(this.forward)
+							this.currentFrame++;
+						else
+							this.currentFrame--;
+						break;
+					case this.HIT:
+						this.currentFrame = 5;
+						this.resetCounter++;
+						if(this.resetCounter === this.timeToReset){
+							this.state = this.HIDDING;
+							this.forward = true;
+							this.currentFrame = 0;
+							this.resetCounter = 0;
+							this.findWaitTime();
+						}
+						break;
+				}
+			},
+			findWaitTime: function(){
+				this.waitTime = Math.floor(Math.random() * 60);
+			},
+		};
+
+		var image = new Image();
+		image.addEventListener("load", loadHandler);
+		image.src = monster.image;
+
+		function loadHandler(){
+			buildMap();
+			gameTimer.time = 30;
+			gameTimer.start();
+			updateAnimation();
+		}
+
+		function updateAnimation(){
+			if(gameTimer.time > 0){
+				setTimeout(updateAnimation,200);
+			}
+
+			for(var i = 0; i < monsterCanvases.length; i++){
+				monsterObjects[i].updateAnimation();
+			}
+
+			if(gameTimer.time == 0){
+				endGame();
+			}
+			render();
+		}
+
+		function render(){
+			for(var i = 0; i < monsterCanvases.length; i++){
+				var monster = monsterObjects[i];
+				var ctx = monsterCanvases[i].getContext("2d");
+
+				ctx.clearRect(0,0,monster.SIZE,monster.SIZE);
+				ctx.drawImage(image,monster.sourceX,monster.sourceY,monster.sourceWidth,monster.sourceHeight,0,0,monster.SIZE,monster.SIZE);
+				output.innerHTML = "Score " + score + " | Time " + gameTimer.time;
+			}
+		}
+
+		function endGame(){
+			gameTimer.stop();
+			for(var i = 0; i < monsterCanvases.length; i++){
+				monsterObjects[i].currentFrame = 0;
+				monsterObjects[i].updateAnimation();
+				monsterCanvases[i].removeEventListener("mousedown", mouseHandler);
+			}
+			render();
+		}
+
+		function buildMap(){
+			for(var i = 0; i < ROW; i++){
+				for(var j = 0; j < COLUMN; j++){
+					var canvas = document.createElement("canvas");
+					canvas.setAttribute("id", "m_"+((i*COLUMN)+j+1));
+					canvas.setAttribute("width", monster.SIZE);
+					canvas.setAttribute("height", monster.SIZE);
+					canvas.style.left = SIZE * j + PADDING + "px";
+					canvas.style.top = SIZE * i + PADDING + "px";
+					canvas.addEventListener("mousedown", mouseHandler);
+
+					var ctx = canvas.getContext("2d");
+					var object = Object.create(monster);
+					object.findWaitTime();
+
+					monsterCanvases.push(canvas);
+					monsterCtx.push(ctx);
+					monsterObjects.push(object);
+
+					game.appendChild(canvas);
+				}
+			}
+		}
+
+		function mouseHandler(event){
+			var canvasClicked = event.target;
+			for(var i = 0; i < monsterObjects.length; i++){
+				if(monsterCanvases[i] === canvasClicked){
+					var monster = monsterObjects[i];
+					if(monster.state === monster.JUMPING){
+						monster.state = monster.HIT;
+						score++;
+					}
+				}
+			}
+		}
+
+	</script>
+
+</body>
+</html>
