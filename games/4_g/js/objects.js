@@ -10,6 +10,7 @@ var spriteObject = {
 	speed: 3,
 	rotationSpeed: 0.3,
 	name: undefined,
+	hp: false,
 	centerX: function(){
 		return this.x+(this.width/2);
 	},
@@ -40,6 +41,7 @@ alienObject.NORMAL = 1;
 alienObject.EXPLODED = 2;
 alienObject.rotation = 0;
 alienObject.friction = 0.96;
+alienObject.hp = true;
 alienObject.name = "alien";
 alienObject.state = alienObject.NORMAL;
 alienObject.range = 300;

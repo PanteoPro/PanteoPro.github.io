@@ -24,6 +24,8 @@
 	var cannon = Object.create(spriteObject);
 	cannon.x = canvas.width / 2 - cannon.width / 2;
 	cannon.y = 280;
+	cannon.hp = true;
+	cannon.name = "c";
 	sprites.push(cannon);
 	//Создание спрайта указателя
 	var wand = Object.create(spriteObject);
@@ -34,6 +36,7 @@
 	var alien = Object.create(alienObject);
 	alien.x = 150;
 	alien.y = 50;
+	alien.name = "a";
 	sprites.push(alien);
 	//Создание объекта для отображения сообщения о конце игры
 	var gameOverMessage = Object.create(messageObject);
@@ -219,7 +222,7 @@
 		}
 
 		bulletTimer++;
-		if(bulletTimer === timeToFire){
+		if(bulletTimer >= timeToFire && distance <= alien.range){
 			fireAlien();
 			bulletTimer = 0;
 		}
@@ -294,6 +297,10 @@
 						//Уменьшение счетчика цикла на 1 для компенсации
 						j--;
 					}
+					if(Math.sqrt((cannon.centerX() - missile.centerX())*(cannon.centerX() - missile.centerX())+(cannon.centerY() - missile.centerY())*(cannon.centerY() - missile.centerY()))>alien.range-50){
+						removeObject(missile, missiles);
+						removeObject(missile, sprites);
+					}
 				} else if(missile.type === "alien"){
 					if(hitTestRectangle(missile, cannon)){
 						scoreAlien++;
@@ -330,8 +337,8 @@
 		missile.x = alien.centerX() - missile.halfWidth();
 		missile.y = alien.centerY() - missile.halfHeight();
 		//Установка скорости перемещения ракеты
-		missile.vy = alien.vy * 1.5;
-		missile.vx = alien.vx * 1.5;
+		missile.vy = alien.vy * 3;
+		missile.vx = alien.vx * 3;
 		//Добавление спрайта ракеты в массивы sprites и missiles
 		sprites.push(missile);
 		missiles.push(missile);
@@ -378,7 +385,16 @@
 				sprite.sourceWidth, sprite.sourceHeight,
 				Math.floor(sprite.x), Math.floor(sprite.y),
 				sprite.width, sprite.height);
-				drawingSurface.restore();
+				if(sprite.hp){
+					if(sprite.name === "c"){
+						drawingSurface.fillRect(sprite.x,sprite.y + sprite.height + 5,Math.floor(sprite.width * ((scoreNeededToLose - scoreAlien) / scoreNeededToLose)),15);
+						drawingSurface.strokeRect(sprite.x,sprite.y + sprite.height + 5, sprite.width, 15);
+					} else if(sprite.name === "a"){
+						drawingSurface.fillStyle = "#c93253";
+						drawingSurface.fillRect(sprite.x,sprite.y + sprite.height + 5,Math.floor(sprite.width * ((scoreNeededToWin - score) / scoreNeededToWin)),15);
+						drawingSurface.strokeRect(sprite.x,sprite.y + sprite.height + 5, sprite.width, 15);
+					}
+				}
 		}
 		drawingSurface.strokeStyle = "black";
 		drawingSurface.lineWidth = 5;
