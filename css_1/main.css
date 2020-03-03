@@ -13,7 +13,7 @@ html {
     box-shadow: 1px 1px 100px rgba(0,0,0,0.4)
 }
 .profile {
-    flex-basis: 35%;
+    flex-basis: 36%;
     background-color: #39383a;
     color: #ababab;
 }
@@ -114,7 +114,7 @@ address {
 }
 
 .resume {
-    flex-basis: 57%;
+    flex-basis: 56%;
     padding: 25px 30px;
     background-color: #fff;
 }
