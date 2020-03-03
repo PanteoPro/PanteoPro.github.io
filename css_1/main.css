@@ -13,7 +13,7 @@ html {
     box-shadow: 1px 1px 100px rgba(0,0,0,0.4)
 }
 .profile {
-    flex-basis: 36%;
+    flex-basis: 36%; 
     background-color: #39383a;
     color: #ababab;
 }
