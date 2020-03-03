@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>FlexBox Technology</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1 class="title">FlexBox Шпаргалка</h1>
+        <span class="description">Чтобы использовать flex технологию, нужно использовать display: flex или display: inline-flex</span>
+
+        <div class="property">
+            <h2 class="property-title">№1 flex-direction - Направление элементов</h2>
+            <span class="property-description">
+                Значения:
+                <ul class="property-description-list">
+                    <li class="property-description-list-item property-default">row</li>
+                    <li class="property-description-list-item">row-reverse</li>
+                    <li class="property-description-list-item">column</li>
+                    <li class="property-description-list-item">column-reverse</li>
+                </ul>
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title">flex-direction: row</span>
+                <div class="property-example-arena fd_r">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">flex-direction: row-reverse</span>
+                <div class="property-example-arena fd_r_r">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">flex-direction: column</span>
+                <div class="property-example-arena fd_c">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">flex-direction: column-reverse</span>
+                <div class="property-example-arena fd_c_r">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="property">
+            <h2 class="property-title">№2 flex-wrap - Управление элементами, которые не помещаются в одну строку</h2>
+            <span class="property-description">
+                Значения:
+                <ul class="property-description-list">
+                    <li class="property-description-list-item property-default">nowrap</li>
+                    <li class="property-description-list-item">wrap</li>
+                    <li class="property-description-list-item">wrap-reverse</li>
+                </ul>
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title">flex-wrap: nowrap</span>
+                <div class="property-example-arena fw_nw">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                    <div class="block">7</div>
+                    <div class="block">8</div>
+                    <div class="block">9</div>
+                    <div class="block">10</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">flex-wrap: wrap</span>
+                <div class="property-example-arena fw_w">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                    <div class="block">7</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">flex-wrap: wrap-reverse</span>
+                <div class="property-example-arena fw_w_r">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                    <div class="block">7</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="property">
+            <h2 class="property-title">№3 justify-content -  Выравнивает элементы вдоль главной оси элементов</h2>
+            <span class="property-description">
+                Значения:
+                <ul class="property-description-list">
+                    <li class="property-description-list-item property-default">flex-start</li>
+                    <li class="property-description-list-item">center</li>
+                    <li class="property-description-list-item">flex-end</li>
+                    <li class="property-description-list-item">space-between</li>
+                    <li class="property-description-list-item">space-around</li>
+                </ul>
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title">justify-content: flex-start</span>
+                <div class="property-example-arena jc_fs">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">justify-content: center</span>
+                <div class="property-example-arena jc_c">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">justify-content: flex-end</span>
+                <div class="property-example-arena jc_fe">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">justify-content: space-between</span>
+                <div class="property-example-arena jc_sb">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">justify-content: space-around</span>
+                <div class="property-example-arena jc_sa">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="property fix-height">
+            <h2 class="property-title">№4 align-items -  Выравнивает элементы вдоль поперечной оси элементов</h2>
+            <span class="property-description">
+                Значения:
+                <ul class="property-description-list">
+                    <li class="property-description-list-item property-default">flex-start</li>
+                    <li class="property-description-list-item">center</li>
+                    <li class="property-description-list-item">flex-end</li>
+                    <li class="property-description-list-item">baseline</li>
+                    <li class="property-description-list-item">stretch</li>
+                </ul>
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title">align-items: flex-start</span>
+                <div class="property-example-arena ai_fs">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-items: center</span>
+                <div class="property-example-arena ai_c">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-items: flex-end</span>
+                <div class="property-example-arena ai_fe">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-items: baseline</span>
+                <div class="property-example-arena ai_b">
+                    <div class="block">1</div>
+                    <div class="block high">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-items: stretch</span>
+                <div class="property-example-arena ai_s">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="property  flex-wrap fix-very-height">
+            <h2 class="property-title">№5 align-content -  Выравнивает строки блоков, по вертикали (Работает только при нескольких строках блоков</h2>
+            <span class="property-description">
+                Значения:
+                <ul class="property-description-list">
+                    <li class="property-description-list-item property-default">flex-start</li>
+                    <li class="property-description-list-item">center</li>
+                    <li class="property-description-list-item">flex-end</li>
+                    <li class="property-description-list-item">space-between</li>
+                    <li class="property-description-list-item">space-around</li>
+                    <li class="property-description-list-item">stretch</li>
+                </ul>
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title">align-content: flex-start</span>
+                <div class="property-example-arena ac_fs">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                    <div class="block">7</div>
+                    <div class="block">8</div>
+                    <div class="block">9</div>
+                    <div class="block">10</div>
+                    <div class="block">11</div>
+                    <div class="block">12</div>
+                    <div class="block">13</div>
+                    <div class="block">14</div>
+                    <div class="block">15</div>
+                    <div class="block">16</div>
+                    <div class="block">17</div>
+                    <div class="block">18</div>
+                    <div class="block">19</div>
+                    <div class="block">20</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-content: center</span>
+                <div class="property-example-arena ac_c">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                    <div class="block">7</div>
+                    <div class="block">8</div>
+                    <div class="block">9</div>
+                    <div class="block">10</div>
+                    <div class="block">11</div>
+                    <div class="block">12</div>
+                    <div class="block">13</div>
+                    <div class="block">14</div>
+                    <div class="block">15</div>
+                    <div class="block">16</div>
+                    <div class="block">17</div>
+                    <div class="block">18</div>
+                    <div class="block">19</div>
+                    <div class="block">20</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-content: flex-end</span>
+                <div class="property-example-arena ac_fe">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                    <div class="block">7</div>
+                    <div class="block">8</div>
+                    <div class="block">9</div>
+                    <div class="block">10</div>
+                    <div class="block">11</div>
+                    <div class="block">12</div>
+                    <div class="block">13</div>
+                    <div class="block">14</div>
+                    <div class="block">15</div>
+                    <div class="block">16</div>
+                    <div class="block">17</div>
+                    <div class="block">18</div>
+                    <div class="block">19</div>
+                    <div class="block">20</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-content: space-between</span>
+                <div class="property-example-arena ac_sb">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                    <div class="block">7</div>
+                    <div class="block">8</div>
+                    <div class="block">9</div>
+                    <div class="block">10</div>
+                    <div class="block">11</div>
+                    <div class="block">12</div>
+                    <div class="block">13</div>
+                    <div class="block">14</div>
+                    <div class="block">15</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-content: space-around</span>
+                <div class="property-example-arena ac_sa">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                    <div class="block">7</div>
+                    <div class="block">8</div>
+                    <div class="block">9</div>
+                    <div class="block">10</div>
+                    <div class="block">11</div>
+                    <div class="block">12</div>
+                    <div class="block">13</div>
+                    <div class="block">14</div>
+                    <div class="block">15</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-content: stretch</span>
+                <div class="property-example-arena ac_s">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                    <div class="block">7</div>
+                    <div class="block">8</div>
+                    <div class="block">9</div>
+                    <div class="block">10</div>
+                    <div class="block">11</div>
+                    <div class="block">12</div>
+                    <div class="block">13</div>
+                    <div class="block">14</div>
+                    <div class="block">15</div>
+                    <div class="block">16</div>
+                    <div class="block">17</div>
+                    <div class="block">18</div>
+                    <div class="block">19</div>
+                    <div class="block">20</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="property">
+            <h2 class="property-title">№6 order - меняет порядок элементов</h2>
+            <span class="property-description">
+                Вводится номер - order: -1; order: 100
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title">order: -100 (Для 4 элемента)</span>
+                <div class="property-example-arena fd_r">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block first">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="property fix-height">
+            <h2 class="property-title">№7 align-self - Это align по вертикали, только для строки элементов</h2>
+            <span class="property-description">
+                Значения:
+                <ul class="property-description-list">
+                    <li class="property-description-list-item property-default">flex-start</li>
+                    <li class="property-description-list-item">center</li>
+                    <li class="property-description-list-item">flex-end</li>
+                    <li class="property-description-list-item">baselinen</li>
+                    <li class="property-description-list-item">stretch</li>
+                </ul>
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title">align-self: flex-start</span>
+                <div class="property-example-arena as_fs">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-self: center</span>
+                <div class="property-example-arena as_c">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-self: flex-end</span>
+                <div class="property-example-arena as_fe">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-self: baseline</span>
+                <div class="property-example-arena as_b">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block high">3</div>
+                    <div class="block">4</div>
+                    <div class="block high2">5</div>
+                    <div class="block low">6</div>
+                </div>
+            </div>
+            <div class="property-example">
+                <span class="property-example-title">align-self: stretch</span>
+                <div class="property-example-arena as_s">
+                    <div class="block">1</div>
+                    <div class="block">2</div>
+                    <div class="block">3</div>
+                    <div class="block">4</div>
+                    <div class="block">5</div>
+                    <div class="block">6</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>
