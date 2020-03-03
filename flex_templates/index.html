@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>flex Templates</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="template">
+            <div class="arena">
+                <div class="t1_wrap">
+                    <div class="t1_left t">1</div>
+                    <div class="t1_right">
+                        <div class="t1_right_block t">2</div>
+                        <div class="t1_right_block t">3</div>
+                    </div>
+                </div>
+            </div>
+            <div class="code">
+                <span>.t1_wrap {<br>
+                    display: flex;<br>
+                    flex-wrap: wrap;<br>
+                }</span>
+                <span>
+                    .t1_left {<br>
+                        flex: auto;<br>
+                        display: flex;<br>
+                        justify-content: center;<br>
+                        align-items: center;<br>
+                        min-height: 430px;<br>
+                    }
+                </span>
+                <span>
+                    .t1_right {<br>
+                        flex-direction: column;<br>
+                        margin-left: 15px;<br>
+                        display: flex;<br>
+                        flex: 0 0 160px;<br>
+                    }
+                </span>
+                <span>
+                    .t1_right_block {<br>
+                        min-height: 200px;<br>
+                        display: flex;<br>
+                        justify-content: center;<br>
+                        align-items: center;<br>
+                        margin-bottom: 30px;<br>
+                    }
+                </span>
+                <span>
+                    .t1_right_block:last-child {<br>
+                        margin-bottom: 0;<br>
+                    }
+                </span>
+            </div>
+        </div>
+
+        <div class="template">
+            <div class="arena">
+                <div class="t2_head t"></div>
+                <div class="t2_grid">
+                    <div class="t2_grid_item t">1</div>
+                    <div class="t2_grid_item t">2</div>
+                    <div class="t2_grid_item t">3</div>
+                    <div class="t2_grid_item t">4</div>
+                    <div class="t2_grid_item t">5</div>
+                    <div class="t2_grid_item t">6</div>
+                </div>
+            </div>
+            <div class="code">
+                <span>
+                .t2_head {<br>
+                    min-width: 480px;<br>
+                    max-width: 600px;<br>
+                    min-height: 100px;<br>
+                    margin: 0 auto 40px;<br>
+                }
+                
+                
+                
+                </span>
+                <span>
+                    .t2_grid {<br>
+                        display: flex;<br>
+                        width: 100%;<br>
+                        min-width: 480px;<br>
+                        max-width: 600px;<br>
+                        padding: 0 30px;<br>
+                        margin: 0 auto;<br>
+                        flex-wrap: wrap;<br>
+                    }
+                </span>
+                <span>
+                    .t2_grid_item {<br>
+                        display: flex;<br>
+                        justify-content: center;<br>
+                        align-items: center;<br>
+                        flex: 1 1 calc(33.33% - 20px);<br>
+                        height: 150px;<br>
+                        margin: 0 10px 25px;<br>
+                    }
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

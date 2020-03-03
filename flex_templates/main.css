@@ -1,0 +1,97 @@
+html, *{
+    box-sizing: border-box;
+}
+
+.wrapper {
+    width: 900px;
+    margin: auto;
+    border: 1px solid #333;
+}
+
+.template{
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.arena {
+    margin-bottom: 20px;
+}
+
+.t {
+    background-color: #222;
+    color: #fff;
+    font-size: 40px;
+}
+
+.code {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.code span {
+    display: inline-block;
+    padding: 5px;
+    border: 1px solid #333;
+}
+
+.t1_wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.t1_left {
+    flex: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 430px;
+}
+
+.t1_right {
+    flex-direction: column;
+    margin-left: 15px;
+    display: flex;
+    flex: 0 0 160px;
+}
+
+.t1_right_block {
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.t1_right_block:last-child {
+    margin-bottom: 0;
+}
+
+
+
+.t2_head {
+    min-width: 480px;
+    max-width: 600px;
+    min-height: 100px;
+    margin: 0 auto 40px;
+}
+
+.t2_grid {
+    display: flex;
+    width: 100%;
+    min-width: 480px;
+    max-width: 600px;
+    padding: 0 30px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.t2_grid_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 calc(33.33% - 20px);
+    height: 150px;
+    margin: 0 10px 25px;
+}

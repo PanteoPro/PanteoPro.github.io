@@ -471,6 +471,102 @@
 
         </div>
 
+        <div class="property growing">
+            <h2 class="property-title">№8 flex-grow - определяет как много свободного пространства во flex-контейнере должно быть назначено текущему элементу</h2>
+            <span class="property-description">
+                (flex grow factor — «коэффициент увеличения flex»). Свободное пространство — разница между размером flex-контейнера и размером всех его flex-элементов вместе.
+                На практике flex-grow используется вместе с другими flex-свойствами flex-shrink и flex-basis, и обычно определяется с помощью сокращения (shorthand) flex, чтобы убедиться, что все значения заданы.
+                flex-grow: 3.2
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title"></span>
+                <div class="property-example-arena">
+                    <div class="block grow1">1</div>
+                    <div class="block grow2">2</div>
+                    <div class="block grow3">3</div>
+                    <div class="block grow2">2</div>
+                    <div class="block grow1">1</div>
+                    <div class="block grow1">1</div>
+                    <div class="block grow1">1</div>
+                    <div class="block grow2">2</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="property">
+            <h2 class="property-title">№9 flex-shrink - свойство CSS, которое определяет фактор сжатия flex-элемента.</h2>
+            <span class="property-description">
+                Flex-элементы будут заполнять контейнер в зависимости от значения flex-shrink, когда стандартная ширина flex-элементов шире, чем flex-контейнер.
+                flex-shrink: 1.7
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title"></span>
+                <div class="property-example-arena">
+                    <div class="block shrink1">1</div>
+                    <div class="block shrink2">2</div>
+                    <div class="block shrink1">1</div>
+                    <div class="block shrink3">3</div>
+                    <div class="block shrink3">3</div>
+                    <div class="block shrink3">3</div>
+                    <div class="block shrink1">1</div>
+                    <div class="block shrink2">2</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="property basis">
+            <h2 class="property-title">№10 flex-basis - задает базовый размер флекс элемента по основной оси.  </h2>
+            <span class="property-description">
+                CSS свойство flex-basis задает базовый размер флекс элемента по основной оси. Это свойство определяет размер контент-бокса, если не задано иначе через box-sizing.<br>
+                flex-basis: auto;<br>
+                flex-basis: 200px;<br>
+                flex-basis: 0em;<br>
+                Внимание: в случае, если для элемента одновременно заданы flex-basis (отличное от auto) и width ( или height в случае flex-direction: column), flex-basis имеет приоритет.<br>
+                flex-basis: fill;<br>
+                flex-basis: max-content;<br>
+                flex-basis: min-content;<br>
+                flex-basis: fit-content;<br>
+                flex-basis: content;
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title"></span>
+                <div class="property-example-arena">
+                    <div class="block basis1">1</div>
+                    <div class="block basis2">2</div>
+                    <div class="block basis3">3</div>
+                    <div class="block basis4">4</div>
+                    <div class="block basis5">1</div>
+                    <div class="block basis6">2</div>
+                    <div class="block basis7">3</div>
+                    <div class="block basis8">4</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="property basis">
+            <h2 class="property-title">№11 flex - это сокращенное свойство, определяющее способность гибкого элемента растягиваться или сжиматься для заполнения собой доступного свободного пространства.  </h2>
+            <span class="property-description">
+                Это свойство устанавливает flex-grow, flex-shrink и flex-basis.<br>
+                flex: 1.2 2.3 200px
+            </span>
+
+            <div class="property-example">
+                <span class="property-example-title"></span>
+                <div class="property-example-arena">
+                    <div class="block flex1">1</div>
+                    <div class="block flex2">2</div>
+                    <div class="block flex3">3</div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </body>
 </html>

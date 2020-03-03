@@ -200,3 +200,34 @@
 .as_s .block{
     align-self: stretch;
 }
+
+.growing .block {
+    width: 0;
+    margin:1px;
+}
+.grow1 {
+    flex-grow: 1;
+}
+.grow2 {
+    flex-grow: 2;
+}
+.grow3 {
+    flex-grow: 3;
+}
+
+.shrink1 {flex-shrink: 1;}
+.shrink2 {flex-shrink: 2;}
+.shrink3 {flex-shrink: 3;}
+
+.basis1 {flex-basis: auto;}
+.basis2 {flex-basis: 200px;}
+.basis3 {flex-basis: 2em;}
+.basis4 {flex-basis: fill;}
+.basis5 {flex-basis: max-content;}
+.basis6 {flex-basis: min-content;}
+.basis7 {flex-basis: fit-content;}
+.basis8 {flex-basis: content;}
+
+.flex1{flex:0 0 200px}
+.flex2{flex:0 0 300px}
+.flex3{flex:0 1 400px}
