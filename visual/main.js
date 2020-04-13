@@ -1,5 +1,5 @@
 
-$.getJSON("https://panteopro.github.io/data_1.json", function(json) {
+$.getJSON("https://panteopro.github.io/visual/data_1.json", function(json) {
     let data = json; // this will show the info it in firebug console
     
 
